@@ -1,0 +1,139 @@
+enum TaskStatus {
+  TO_DO
+  IN_PROGRESS
+  DONE
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
+  ON_HOLD
+}
+
+type Moon @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  planetID: ID! @index(name: "byPlanet")
+  satellites: [Satellite] @hasMany(indexName: "byMoon", fields: ["id"])
+  projects: [Project] @hasMany(indexName: "byMoon", fields: ["id"])
+  files: [File] @manyToMany(relationName: "MoonFile")
+  chats: [Chat] @manyToMany(relationName: "MoonChat")
+  eventID: ID @index(name: "byEvent")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+type ProjectRole @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  projectID: ID! @index(name: "byProject")
+  title: String!
+  descriptio: String
+  assignedTo: User! @hasOne
+}
+
+type Event @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  date: [AWSDate]
+  time: [AWSTime]
+  location: String
+  attendees: [User] @hasMany(indexName: "byEvent", fields: ["id"])
+  moons: [Moon] @hasMany(indexName: "byEvent", fields: ["id"])
+  planets: [Planet] @hasMany(indexName: "byEvent", fields: ["id"])
+}
+
+type Chat @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  planets: [Planet] @manyToMany(relationName: "PlanetChat")
+  moons: [Moon] @manyToMany(relationName: "MoonChat")
+  projects: [Project] @manyToMany(relationName: "ProjectChat")
+  tasks: [Task] @manyToMany(relationName: "TaskChat")
+  message: String!
+  sentAt: AWSDateTime!
+  sentBy: User! @hasOne
+}
+
+type File @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  planets: [Planet] @manyToMany(relationName: "PlanetFile")
+  moons: [Moon] @manyToMany(relationName: "MoonFile")
+  projects: [Project] @manyToMany(relationName: "ProjectFile")
+  tasks: [Task] @manyToMany(relationName: "TaskFile")
+  name: String
+  url: AWSURL!
+  uploadedBy: User! @hasOne
+}
+
+type Task @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  projectID: ID! @index(name: "byProject")
+  title: String!
+  description: String
+  status: TaskStatus!
+  assignedUsers: [User] @hasMany(indexName: "byTask", fields: ["id"])
+  dueDate: AWSDate
+  files: [File] @manyToMany(relationName: "TaskFile")
+  chats: [Chat] @manyToMany(relationName: "TaskChat")
+  notes: [String]
+}
+
+type Project @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  moonID: ID! @index(name: "byMoon")
+  name: String!
+  description: String
+  status: ProjectStatus!
+  tasks: [Task] @hasMany(indexName: "byProject", fields: ["id"])
+  members: [User] @hasMany(indexName: "byProject", fields: ["id"])
+  roles: [ProjectRole] @hasMany(indexName: "byProject", fields: ["id"])
+  files: [File] @manyToMany(relationName: "ProjectFile")
+  chats: [Chat] @manyToMany(relationName: "ProjectChat")
+}
+
+type Satellite @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  moonID: ID! @index(name: "byMoon")
+  title: String!
+  description: String
+  User: User @hasOne
+}
+
+type Planet @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  files: [File] @manyToMany(relationName: "PlanetFile")
+  chats: [Chat] @manyToMany(relationName: "PlanetChat")
+  moons: [Moon] @hasMany(indexName: "byPlanet", fields: ["id"])
+  eventID: ID @index(name: "byEvent")
+}
+
+type Location @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userID: ID @index(name: "byUser")
+  planet: Planet @hasOne
+  satellite: Satellite @hasOne
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String
+  phone: String
+  username: String!
+  completedOnboarding: Boolean!
+  role: UserRole!
+  locations: [Location] @hasMany(indexName: "byUser", fields: ["id"])
+  bio: String
+  projectID: ID @index(name: "byProject")
+  taskID: ID @index(name: "byTask")
+  eventID: ID @index(name: "byEvent")
+}
+ 

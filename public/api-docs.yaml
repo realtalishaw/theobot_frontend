@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  title: User Management API
+  version: 1.0.0
+description: API for managing users.
+servers:
+  - url: https://v491qylth0.execute-api.us-east-1.amazonaws.com/staging
+
+paths:
+  /users:
+    post:
+      summary: Create a new user
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created
+        '400':
+          description: Invalid input
+
+    get:
+      summary: List all users
+      operationId: listUsers
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      summary: Get user by specific id
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+
+    put:
+      summary: Update a specific user
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated
+        '400':
+          description: Invalid input
+        '404':
+          description: User not found
+
+    delete:
+      summary: Deletes a user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted
+        '404':
+          description: User not found
+
+  /users/verify/{id}:
+    post:
+      summary: Verifies a user
+      operationId: verifyUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User verified
+        '404':
+          description: User not found
+
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - firstName
+        - username
+        - completedOnboarding
+        - role
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        username:
+          type: string
+        completedOnboarding:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/UserRole'
+        bio:
+          type: string
+
+
+    UserRole:
+      type: string
+      enum:
+        - Admin
+        - User
+        - Guest
+
+
+

@@ -1,0 +1,59 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-theobot-staging-174109-authRole",
+      "UnauthRoleArn": "arn:aws:iam::438420706355:role/amplify-theobot-staging-174109-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::438420706355:role/amplify-theobot-staging-174109-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-theobot-staging-174109-deployment",
+      "UnauthRoleName": "amplify-theobot-staging-174109-unauthRole",
+      "StackName": "amplify-theobot-staging-174109",
+      "StackId": "arn:aws:cloudformation:us-east-1:438420706355:stack/amplify-theobot-staging-174109/cd16d880-99de-11ee-884e-0e3a668d44c3",
+      "AmplifyAppId": "dybbmjhg3wi4c"
+    },
+    "categories": {
+      "function": {
+        "theobotusers": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotusers-62376345427833337450-build.zip"
+        },
+        "theobotplanets": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotplanets-4a71614739437664636c-build.zip"
+        },
+        "theobotmoons": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotmoons-50716333534f6e4c787a-build.zip"
+        },
+        "theobotsatellites": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotsatellites-4c562f6a2f55766e6278-build.zip"
+        },
+        "theobotprojects": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotprojects-4f4436746e4e486b4368-build.zip"
+        },
+        "theobottasks": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobottasks-74307937476b696a5230-build.zip"
+        },
+        "theobotfiles": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotfiles-45583063325a514f5058-build.zip"
+        },
+        "theobotchats": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotchats-45525955664a59774d44-build.zip"
+        },
+        "theobotevents": {
+          "deploymentBucketName": "amplify-theobot-staging-174109-deployment",
+          "s3Key": "amplify-builds/theobotevents-54466e477068346a5564-build.zip"
+        }
+      },
+      "api": {
+        "theobot": {},
+        "theobotdb": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "api": {
+    "theobot": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    },
+    "theobotdb": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotusers"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotplanets"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotmoons"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotsatellites"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotprojects"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobottasks"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotfiles"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotchats"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "theobotevents"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "theobotchats": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotevents": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotfiles": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotmoons": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotplanets": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotprojects": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotsatellites": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobottasks": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "theobotusers": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "theobot"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_theobotchats_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotchats"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotchats_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotchats"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotevents_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotevents"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotevents_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotevents"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotfiles_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotfiles"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotfiles_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotfiles"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotmoons_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotmoons"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotmoons_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotmoons"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotplanets_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotplanets"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotplanets_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotplanets"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotprojects_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotprojects"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotprojects_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotprojects"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotsatellites_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotsatellites"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotsatellites_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotsatellites"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobottasks_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobottasks"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobottasks_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobottasks"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotusers_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotusers"
+        }
+      ]
+    },
+    "AMPLIFY_function_theobotusers_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "theobotusers"
+        }
+      ]
+    }
+  }
+}
